@@ -32,7 +32,7 @@ fileprivate extension NumberTextField {
             stringValue = formatter.string(from: value.wrappedValue) ?? ""
             
             // String -> NSNumber
-            cancellable = $stringValue.receive(on: RunLoop.main)
+            cancellable = $stringValue.dropFirst().receive(on: RunLoop.main)
                 .sink(receiveValue: { [weak self] (editingString) in
                 if let number = formatter.number(from: editingString) {
                     value.wrappedValue = number
